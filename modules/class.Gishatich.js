@@ -1,11 +1,11 @@
-//գիշատիչի կլաս
-class Gishatich extends LivingCreature {
+var LivingCreature = require("./class.LivingCreature");
+var random = require("./random.js");
+
+module.exports = class Gishatich extends LivingCreature {
     constructor(x, y) {
-        super(x, y, index);
-        this.energy = 15;
-
+        super(x, y);
+        this.life = 10;
     }
-
     getNewCoordinates() {
         this.directions = [
             [this.x - 1, this.y - 1],
@@ -21,13 +21,14 @@ class Gishatich extends LivingCreature {
     chooseCell(ch) {
         this.getNewCoordinates();
         return super.chooseCell(ch);
-    }
+    } 
 
 
     //move() շարժվել
     move() {
+        
         //որոնում  է դատարկ  տարածքներ
-        var fundCords = this.getDirections(0)
+        var fundCords = this.chooseCell(0)
         var cord = random(fundCords)
         if (cord) {
             var x = cord[0]
@@ -46,7 +47,7 @@ class Gishatich extends LivingCreature {
     eat() {
 
         //հետազոտում է շրջակայքը, որոնում է սնունդ(այստեղ խոտակեր)
-        var fundCords = this.getDirections(2)
+        var fundCords = this.chooseCell(2)
         var cord = random(fundCords)
         //եթե կա հարմար սնունդ
         if (cord) {
@@ -70,7 +71,7 @@ class Gishatich extends LivingCreature {
                 }
             }
             //եթե պատրաստ է բազմացման,  բազմանում  է
-            if (this.multiply == 15) {
+            if (this.multiply >= 15) {
                 this.mul()
                 this.multiply = 0;
             }
@@ -92,7 +93,7 @@ class Gishatich extends LivingCreature {
     //mul()-բազմանալ
     mul() {
         //փնտրում է դատարկ տարածք
-        var fundCords = this.getDirections(0);
+        var fundCords = this.chooseCell(0);
         var cord = random(fundCords);
 
         if (cord) {

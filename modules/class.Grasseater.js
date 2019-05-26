@@ -1,12 +1,11 @@
-//խոտակերի կլասը
-class Grasseater extends LivingCreature {
-    constructor(x, y, index) {
-        super(x, y, index)
-        this.energy = 10;
+var LivingCreature = require("./class.LivingCreature");
+var random = require("./random.js");
 
+module.exports = class GrassEater extends LivingCreature {
+    constructor(x, y) {
+        super(x, y);
+        this.life = 10;
     }
-
-    //շրջապատում  հնարավոր  քայլերը (matrix-ից)
     getNewCoordinates() {
         this.directions = [
             [this.x - 1, this.y - 1],
@@ -22,13 +21,12 @@ class Grasseater extends LivingCreature {
     chooseCell(ch) {
         this.getNewCoordinates();
         return super.chooseCell(ch);
-
-    }
+    } 
 
     //move() շարժվել
     move() {
         //հետազոտում և որոնում է դատարկ տարածքներ
-        var fundCords = this.getDirections(0);
+        var fundCords = this.chooseCell(0);
         var cord = random(fundCords);
 
         if (cord) {
@@ -50,7 +48,7 @@ class Grasseater extends LivingCreature {
     //eat()-ուտել
     eat() {
         //հետազոտում է շրջակայքը, որոնում է սնունդ, այստեղ(խոտակերին)
-        var fundCords = this.getDirections(1);
+        var fundCords = this.chooseCell(1);
         var cord = random(fundCords);
 
         if (cord) {
@@ -79,7 +77,7 @@ class Grasseater extends LivingCreature {
             }
 
             //եթե պատրաստ է բազմացմանը, բազմանում է 
-            if (this.multiply == 10) {
+            if (this.multiply >= 10) {
                 this.mul()
                 this.multiply = 0;
             }
@@ -98,7 +96,7 @@ class Grasseater extends LivingCreature {
     //mul() բազմանալ
     mul() {
         //փնտրում է դատարկ տարածք
-        var fundCords = this.getDirections(0);
+        var fundCords = this.chooseCell(0);
         var cord = random(fundCords);
         if (cord) {
             var x = cord[0];

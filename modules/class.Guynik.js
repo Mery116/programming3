@@ -1,9 +1,11 @@
-class Guynik extends LivingCreature {
-    constructor(x, y) {
-        super(x, y, index);
-        this.energy = 5;
-    }
+var LivingCreature = require("./class.LivingCreature");
+var random = require("./random.js");
 
+module.exports = class Guynik extends LivingCreature {
+    constructor(x, y) {
+        super(x, y);
+        this.life = 10;
+    }
     getNewCoordinates() {
         this.directions = [
             [this.x - 1, this.y - 1],
@@ -15,16 +17,15 @@ class Guynik extends LivingCreature {
             [this.x, this.y + 1],
             [this.x + 1, this.y + 1]
         ];
-
     }
     chooseCell(ch) {
         this.getNewCoordinates();
         return super.chooseCell(ch);
-    }
+    } 
     //move() շարժվել
     move() {
         //որոնում  է դատարկ  տարածքներ
-        var fundCords = this.getDirections(0)
+        var fundCords = this.chooseCell(0)
         var cord = random(fundCords)
         if (cord) {
 
@@ -44,8 +45,8 @@ class Guynik extends LivingCreature {
 
     eat() {
         //հետազոտում է շրջակայքը, որոնում է սնունդ
-        var fundCords1 = this.getDirections(1)
-        var fundCords2 = this.getDirections(4)
+        var fundCords1 = this.chooseCell(1)
+        var fundCords2 = this.chooseCell(4)
         let fundcords = fundCords1.concat(fundCords2)
         var cord = random(fundcords)
 
@@ -85,7 +86,7 @@ class Guynik extends LivingCreature {
             }
 
             //եթե պատրաստ է բազմացման,  բազմանում  է
-            if (this.multiply == 10) {
+            if (this.multiply >= 10) {
                 this.mul()
                 this.multiply = 0;
 
@@ -111,7 +112,7 @@ class Guynik extends LivingCreature {
 
     mul() {
         //փնտրում է դատարկ տարածք
-        var fundCords = this.getDirections(0);
+        var fundCords = this.chooseCell(0);
         var cord = random(fundCords);
 
         //եթե կա բազմանում է

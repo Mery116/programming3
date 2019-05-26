@@ -2,32 +2,50 @@
 
 <head>
     <meta charset="utf8">
+    <script src="/socket.io/socket.io.js"></script>
     <script src="p5.js"></script>
-    <script src="class.grass.js"></script>
-    <script src="class.Grasseater.js"></script>
-    <script src="class.Gishatich.js"></script>
-    <script src="class.Guynik.js"></script>
-    <script src="class.Strange.js"></script>
+
     <script src="script.js"></script>
     <style>
-        #legend {position: absolute;top: 0;right: 0;width: 800px;} .legend-color {width: 30px;height: 30px;} td {border: 1px solid black; font-size: 14px; padding-left: 5px;}
-        div{
-            display:inline-block;
+        #legend {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 800px;
         }
-    
+
+        .legend-color {
+            width: 30px;
+            height: 30px;
+        }
+
+        td {
+            border: 1px solid black;
+            font-size: 14px;
+            padding-left: 5px;
+        }
+
+        div {
+            display: inline-block;
+        }
     </style>
 </head>
 
-
 <body>
+    <button onclick="kill()">Kill  all the objects</button>
+    <button onclick="pushgrasses()">Push Grasses</button>
+    <button onclick="pushgrasseaters()">Push GrassEaters</button>
+    <button onclick="changecolour()">Change Explodes colour</button>
+
     <div style="background-color:green; width:15px; height:15px"></div>Խոտ
     <div style="background-color:orange; width:15px; height:15px"></div>Խոտակեր
     <div style="background-color:yellow; width:15px; height:15px"></div>Գիշատիչ
     <div style="background-color:pink; width:15px; height:15px"></div>Տարօրինակ
     <div style="background-color:purple; width:15px; height:15px"></div>Գույնիկ
+    <div style="background-color:red; width:15px; height:15px"></div>Պայթուցիկներ
     <div style="background-color:#acacac; width:15px; height:15px"></div>Դատարկ տարածք<br><br>
-
-    <table id="legend">
+    
+    <!-- <table id="legend">
         <tr>
             <td class="legend-color">Գույն</td>
             <td>Անվանում</td>
@@ -70,20 +88,21 @@
             <td>Սատկում է, երբ էներգիան փոքր է 0֊ից</td>
         </tr>
         <td class="legend-color" style="background-color:pink"></td>
-            <td>Տարօրինակ</td>
-            <td>Խոտերի վրայով, էներգիան քչանում է 1֊ով</td>
-            <td>Խոտակերներին  և գիշատիչներին,  շարժվելիս էներգիան ավելանում է 1֊ով</td>
-            <td>Բազմանում է, երբ էներգիան 2֊ից ավել է</td>
-            <td>Սատկում է, երբ էներգիան փոքր է 0֊ից</td>
+        <td>Տարօրինակ</td>
+        <td>Խոտերի վրայով, էներգիան քչանում է 1֊ով</td>
+        <td>Խոտակերներին և գիշատիչներին, շարժվելիս էներգիան ավելանում է 1֊ով</td>
+        <td>Բազմանում է, երբ էներգիան 2֊ից ավել է</td>
+        <td>Սատկում է, երբ էներգիան փոքր է 0֊ից</td>
         </tr>
         <td class="legend-color" style="background-color:purple"></td>
-            <td>Գույնիկ</td>
-            <td>8 վանդակներով, էներգիան քչանում է 1֊ով</td>
-            <td>Խոտերին  և տարօրինակներին, շարժվելիս էներգիան ավելանում է 1֊ով</td>
-            <td>Բազմանում է, երբ էներգիան 10֊ից ավել է</td>
-            <td>Սատկում է, երբ էներգիան փոքր է 0֊ից</td>
+        <td>Գույնիկ</td>
+        <td>8 վանդակներով, էներգիան քչանում է 1֊ով</td>
+        <td>Խոտերին և տարօրինակներին, շարժվելիս էներգիան ավելանում է 1֊ով</td>
+        <td>Բազմանում է, երբ էներգիան 10֊ից ավել է</td>
+        <td>Սատկում է, երբ էներգիան փոքր է 0֊ից</td>
         <tr>
     </table>
+     -->
 </body>
 
 </html>
